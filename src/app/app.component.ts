@@ -13,6 +13,7 @@ export class AppComponent {
   faUndo = faUndo;
 
   constructor(public gameService: GameService) {
+    gameService.startGame();
   }
 
 }

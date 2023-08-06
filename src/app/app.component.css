@@ -34,7 +34,6 @@
 .column {
   margin-left: var(--card-space);
   margin-right: var(--card-space);
-  /* position: relative; */
   display: flex;
   flex-direction: column;
 }
@@ -48,7 +47,7 @@
 }
 
 .playmat-footer .column>app-card {
-  margin-bottom:  calc(var(--card-height) * -1);
+  margin-bottom:  calc(var(--card-height) * -1 - 1.8px);
 }
 
 .actions-column {
@@ -73,4 +72,8 @@
 
 .action:active {
   color: rgb(255, 255, 255, 1);
+}
+
+.clickable {
+  cursor: pointer;
 }

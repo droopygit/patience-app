@@ -2,7 +2,7 @@ body {
   --card-space: 10px;
   --card-width: calc((100vw - 18 * var(--card-space)) / 8);
   --card-height: calc(var(--card-width) / 2.5 * 3.5);
-  --card-radius: 3px;
+  --card-radius: 5%;
   --fore-color: rgba(172, 255, 47, 0.1);
   --border-width: 2px;
   margin: 0;
@@ -12,5 +12,4 @@ body {
 playing-card {
   --card-size: calc(var(--card-width) / 2.5);
   --card-border-radius: var(--card-radius);
-  /* background: linear-gradient(#e66465, #9198e5); */
 }

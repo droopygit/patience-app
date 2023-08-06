@@ -1,1 +1,19 @@
-<playing-card [attr.rank]="getCardRank(card?.rank)" [attr.suit]="getCartSuit(card?.suit)"></playing-card>
+<div class="card" *ngIf="!card?.flipped; else flipped">
+    <div class="card-header" [ngClass]="{ 'red': card?.suit === cardSuit.Diamond || card?.suit === cardSuit.Heart}">
+        <div>
+            {{ this.cardService.getRankText(card?.rank) }}
+        </div>
+        <div>
+            <img src="/assets/{{ this.cardService.getSuitText(card?.suit) }}.svg">
+        </div>
+    </div>
+    <div class="card-body">
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+
+<ng-template #flipped>
+    <div class="back">
+    </div>
+</ng-template>
