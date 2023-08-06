@@ -23,8 +23,6 @@
     </div>
     <div class="column">
       <app-card-place></app-card-place>
-      <app-card [rank]="'5'" [suit]="'D'"></app-card>
-      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
     </div>
   </div>
   <div class="playmat-body">
@@ -36,9 +34,6 @@
     </div>
     <div class="column">
       <app-card-place></app-card-place>
-      <app-card [rank]="'5'" [suit]="'D'"></app-card>
-      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
-      <app-card [rank]="'10'" [suit]="'C'"></app-card>
     </div>
     <div class="column">
       <app-card-place></app-card-place>
@@ -54,13 +49,11 @@
     </div>
     <div class="column">
       <app-card-place></app-card-place>
-      <app-card [rank]="'5'" [suit]="'D'"></app-card>
-      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
     </div>
   </div>
   <div class="playmat-footer">
     <div class="actions-column">
-      <div class="action">
+      <div class="action" (click)="gameService.startGame()">
         <fa-icon [icon]="faPlus"></fa-icon> Nouvelle partie
       </div>
       <div class="action">
@@ -69,13 +62,15 @@
     </div>
     <div class="column">
       <app-card-place></app-card-place>
-      <app-card [rank]="'5'" [suit]="'D'"></app-card>
-      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+      <ng-container *ngFor="let card of gameService.revealed">
+        <app-card [card]="card"></app-card>
+      </ng-container>
     </div>
-    <div class="column">
+    <div class="column" (click)="gameService.revealCard()">
       <app-card-place></app-card-place>
-      <app-card [rank]="'5'" [suit]="'D'"></app-card>
-      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+      <ng-container *ngFor="let card of gameService.draw">
+        <app-card [card]="card"></app-card>
+      </ng-container>
     </div>
   </div>
 </div>

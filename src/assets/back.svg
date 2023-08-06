@@ -1,0 +1,15 @@
+<svg width="50" height="50"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden">
+
+    <line x1="0" y1="0" x2="50" y2="50" style="stroke:#f00" stroke-linecap="butt" />
+    <line x1="3" y1="0" x2="53" y2="50" style="stroke:#000" stroke-linecap="butt" />
+    <line x1="-3" y1="0" x2="47" y2="50" style="stroke:#f00" stroke-linecap="butt" />
+    <line x1="6" y1="0" x2="56" y2="50" style="stroke:#000" stroke-linecap="butt" />
+    <line x1="-6" y1="0" x2="44" y2="50" style="stroke:#f00" stroke-linecap="butt" />
+    <line x1="50" y1="0" x2="0" y2="50" style="stroke:#000" stroke-linecap="butt" />
+    <line x1="53" y1="0" x2="3" y2="50" style="stroke:#f00" stroke-linecap="butt" />
+    <line x1="47" y1="0" x2="-3" y2="50" style="stroke:#000" stroke-linecap="butt" />
+    <line x1="56" y1="0" x2="6" y2="50" style="stroke:#f00" stroke-linecap="butt" />
+    <line x1="44" y1="0" x2="-6" y2="50" style="stroke:#000" stroke-linecap="butt" />
+</svg>
