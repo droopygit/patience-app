@@ -1,0 +1,7 @@
+.placeholder {
+  border: var(--border-width) solid var(--fore-color);
+  background-color: var(--fore-color);
+  border-radius: var(--card-radius);
+  width: calc(var(--card-width) - 2 * var(--border-width));
+  height: calc(var(--card-height) - 2 * var(--border-width));
+}

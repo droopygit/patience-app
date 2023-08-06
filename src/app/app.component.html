@@ -1,0 +1,81 @@
+<div class="playmat">
+  <div class="playmat-header">
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+      <app-card [rank]="'5'" [suit]="'D'"></app-card>
+      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+    </div>
+  </div>
+  <div class="playmat-body">
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+      <app-card [rank]="'5'" [suit]="'D'"></app-card>
+      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+      <app-card [rank]="'10'" [suit]="'C'"></app-card>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+      <app-card [rank]="'5'" [suit]="'D'"></app-card>
+      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+    </div>
+  </div>
+  <div class="playmat-footer">
+    <div class="actions-column">
+      <div class="action">
+        <fa-icon [icon]="faPlus"></fa-icon> Nouvelle partie
+      </div>
+      <div class="action">
+        <fa-icon [icon]="faUndo"></fa-icon> Annuler
+      </div>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+      <app-card [rank]="'5'" [suit]="'D'"></app-card>
+      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+    </div>
+    <div class="column">
+      <app-card-place></app-card-place>
+      <app-card [rank]="'5'" [suit]="'D'"></app-card>
+      <app-card [rank]="'Q'" [suit]="'S'"></app-card>
+    </div>
+  </div>
+</div>

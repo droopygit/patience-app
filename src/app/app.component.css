@@ -1,0 +1,76 @@
+.playmat {
+  background-color: forestgreen;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.playmat-header {
+  display: flex;
+  height: 50px;
+  align-items: flex-end;
+  padding: 0 10px;
+}
+
+.playmat-body {
+  display: flex;
+  margin-top: 20px;
+  flex-grow: 1;
+  padding: 0 10px;
+}
+
+.playmat-body.column {
+  margin: var(--card-space);
+}
+
+.playmat-footer {
+  display: flex;
+  height: 150px;
+  padding: 0 10px;
+}
+
+.column {
+  margin-left: var(--card-space);
+  margin-right: var(--card-space);
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+}
+
+.playmat-body .column>app-card-place, .playmat-footer .column>app-card-place {
+  margin-bottom:  calc(var(--card-height) * -1);
+}
+
+.playmat-body .column>app-card {
+  margin-bottom:  calc(var(--card-height) * -1 + 30px);
+}
+
+.playmat-footer .column>app-card {
+  margin-bottom:  calc(var(--card-height) * -1);
+}
+
+.actions-column {
+  flex-grow: 1;
+  align-self: flex-end;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.action {
+  color: rgb(255, 255, 255, .6);
+  border: var(--border-width) solid var(--fore-color);
+  border-radius: var(--card-radius);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.action:hover {
+  background-color: var(--fore-color);
+}
+
+.action:active {
+  color: rgb(255, 255, 255, 1);
+}
