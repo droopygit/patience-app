@@ -25,8 +25,6 @@ export class CardComponent {
 
   select() {
     if (this.selectable && this.card) {
-      console.log("card selected");
-      
       this.gameService.selectOrDeselectCard(this.card);
     }
   }

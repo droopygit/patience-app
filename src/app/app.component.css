@@ -14,6 +14,10 @@
   padding: 0 10px;
 }
 
+.playmat-header .column>app-card {
+  transform: rotate(180deg);
+}
+
 .playmat-body {
   display: flex;
   margin-top: 20px;
@@ -38,12 +42,13 @@
   flex-direction: column;
 }
 
-.playmat-body .column>app-card-place, .playmat-footer .column>app-card-place {
-  margin-bottom:  calc(var(--card-height) * -1);
+.playmat-body .column>app-card-place, 
+.playmat-footer .column>app-card-place {
+  margin-bottom: calc(var(--card-height) * -1);
 }
 
 .playmat-body .column>app-card {
-  margin-bottom:  calc(var(--card-height) * -1 + 30px);
+  margin-bottom: calc(var(--card-height) * -1 + 30px);
 }
 
 .playmat-footer .column>app-card {

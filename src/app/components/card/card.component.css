@@ -9,11 +9,15 @@
 }
 
 .card {
-    padding: 10px;
     display: flex;
     flex-direction: column;
     height: 100%;
     font-size: 18px;
+}
+
+.card-content {
+    padding: 10px;
+    height: 100%;
 }
 
 .card-header {
@@ -46,6 +50,8 @@ img {
     background-image: url('/assets/back.svg');
     height: 100%;
     border-radius: var(--card-radius);
+    margin: 6px;
+    border: 1px solid var(--card-border-color);
 }
 
 .selected {

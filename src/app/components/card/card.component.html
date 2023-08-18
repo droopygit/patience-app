@@ -1,15 +1,17 @@
-<div class="card" *ngIf="!card?.flipped; else flipped" [ngClass]="{'selected': card === gameService.selectedCard}" (click)="select()">
-    <div class="card-header" [ngClass]="{ 'red': card?.suit === cardSuit.Diamond || card?.suit === cardSuit.Heart}">
-        <div>
-            {{ this.cardService.getRankText(card?.rank) }}
+<div class="card" *ngIf="!card?.flipped; else flipped" (click)="select()">
+    <div class="card-content" [ngClass]="{'selected': card === gameService.selectedCard}">    
+        <div class="card-header" [ngClass]="{ 'red': card?.suit === cardSuit.Diamond || card?.suit === cardSuit.Heart}">
+            <div>
+                {{ this.cardService.getRankText(card?.rank) }}
+            </div>
+            <div>
+                <img src="/assets/{{ this.cardService.getSuitText(card?.suit) }}.svg">
+            </div>
         </div>
-        <div>
-            <img src="/assets/{{ this.cardService.getSuitText(card?.suit) }}.svg">
+        <div class="card-body">
         </div>
-    </div>
-    <div class="card-body">
-    </div>
-    <div class="card-footer">
+        <div class="card-footer">
+        </div>
     </div>
 </div>
 

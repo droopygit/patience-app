@@ -1,37 +1,21 @@
 <div class="playmat">
   <div class="playmat-header">
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
+    <ng-container *ngFor="let cards of gameService.headerColumnCards; let i = index">
+      <div class="column clickable" (click)="gameService.moveSelectedCardToHeaderColumn(i)">
+        <app-card-place></app-card-place>
+        <ng-container *ngFor="let card of cards">
+          <app-card [card]="card" [selectable]="false"></app-card>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
 
   <div class="playmat-body">
     <ng-container *ngFor="let cards of gameService.columnCards; let i = index">
-      <div class="column" (click)="gameService.moveSelectedCardToColumn(i)">
+      <div class="column clickable" (click)="gameService.moveSelectedCardToColumn(i)">
         <app-card-place></app-card-place>
         <ng-container *ngFor="let card of cards">
-          <app-card [card]="card" [selectable]="false"></app-card>
+          <app-card [card]="card" [selectable]="true"></app-card>
         </ng-container>
       </div>
     </ng-container>
@@ -47,16 +31,8 @@
       </div>
     </div>
 
-    <!-- Revealed cards -->
-    <div class="column clickable">
-      <app-card-place></app-card-place>
-      <ng-container *ngFor="let card of gameService.revealed">
-        <app-card [card]="card" [selectable]="true"></app-card>
-      </ng-container>
-    </div>
-
     <!-- Draw -->
-    <div class="column clickable" (click)="gameService.revealCard()">
+    <div class="column clickable" (click)="gameService.dealCards()">
       <app-card-place></app-card-place>
       <ng-container *ngFor="let card of gameService.draw">
         <app-card [card]="card"></app-card>
