@@ -1,9 +1,11 @@
 :host {
+    --card-border-color: rgb(158, 158, 158);
     width: var(--card-width);
     height: var(--card-height);
     border-radius: var(--card-radius);
     background-color: #fff;
-    border: 1px solid rgb(158, 158, 158);
+    border: 1px solid var(--card-border-color);
+    margin: -1px;
 }
 
 .card {
@@ -44,4 +46,10 @@ img {
     background-image: url('/assets/back.svg');
     height: 100%;
     border-radius: var(--card-radius);
+}
+
+.selected {
+    border: 3px solid rgb(0, 91, 219);
+    border-radius: var(--card-radius);
+    margin: -3px;
 }

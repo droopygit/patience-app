@@ -25,47 +25,37 @@
       <app-card-place></app-card-place>
     </div>
   </div>
+
   <div class="playmat-body">
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
-    <div class="column">
-      <app-card-place></app-card-place>
-    </div>
+    <ng-container *ngFor="let cards of gameService.columnCards; let i = index">
+      <div class="column" (click)="gameService.moveSelectedCardToColumn(i)">
+        <app-card-place></app-card-place>
+        <ng-container *ngFor="let card of cards">
+          <app-card [card]="card" [selectable]="false"></app-card>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
+
   <div class="playmat-footer">
     <div class="actions-column">
-      <div class="action" (click)="gameService.startGame()">
+      <div class="action" (click)="startNewGame()">
         <fa-icon [icon]="faPlus"></fa-icon> Nouvelle partie
       </div>
       <div class="action">
         <fa-icon [icon]="faUndo"></fa-icon> Annuler
       </div>
     </div>
-    <div class="column">
+
+    <!-- Revealed cards -->
+    <div class="column clickable">
       <app-card-place></app-card-place>
       <ng-container *ngFor="let card of gameService.revealed">
-        <app-card [card]="card"></app-card>
+        <app-card [card]="card" [selectable]="true"></app-card>
       </ng-container>
     </div>
+
+    <!-- Draw -->
     <div class="column clickable" (click)="gameService.revealCard()">
       <app-card-place></app-card-place>
       <ng-container *ngFor="let card of gameService.draw">

@@ -16,4 +16,11 @@ export class AppComponent {
     gameService.startGame();
   }
 
+  startNewGame() {
+    if (confirm("Êtes-vous sûr de vouloir commencer une nouvelle partie ?")) {
+      this.gameService.startGame();
+    }
+  }
+  
+
 }

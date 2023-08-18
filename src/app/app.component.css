@@ -47,7 +47,7 @@
 }
 
 .playmat-footer .column>app-card {
-  margin-bottom:  calc(var(--card-height) * -1 - 1.8px);
+  margin-bottom:  calc(var(--card-height) * -1 - 0.8px);
 }
 
 .actions-column {

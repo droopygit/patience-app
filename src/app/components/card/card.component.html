@@ -1,4 +1,4 @@
-<div class="card" *ngIf="!card?.flipped; else flipped">
+<div class="card" *ngIf="!card?.flipped; else flipped" [ngClass]="{'selected': card === gameService.selectedCard}" (click)="select()">
     <div class="card-header" [ngClass]="{ 'red': card?.suit === cardSuit.Diamond || card?.suit === cardSuit.Heart}">
         <div>
             {{ this.cardService.getRankText(card?.rank) }}
