@@ -49,8 +49,7 @@ export class GameService {
       this.selectedCard = undefined;
     } else if (this.selectedCard === undefined) {
       this.selectedCard = card;
-      console.log("card selected");
-      
+
     }
   }
 
@@ -64,26 +63,45 @@ export class GameService {
   }
 
   moveSelectedCardToColumn(index: number) {
-    if (this.selectedCard) {
-      
-      // Remove from source
-      if (this.revealed.includes(this.selectedCard)) {
-        this.revealed.pop();
-      } else {
-        for (const cards of this.columnCards) {
-          if (cards.includes(this.selectedCard)) {
-            cards.pop();
-            break;
-          }
+
+    if (this.selectedCard === undefined) {
+      return
+    }
+
+    // Check if it's possible to move the card here
+    if (this.columnCards[index].length > 0) {
+      const lastCard = this.columnCards[index][this.columnCards[index].length - 1];
+      if (this.revealed.length > 0 && lastCard === undefined) {
+        return;
+      }
+
+      // Card must be of the other color
+      if (this.cardService.getSuitColor(lastCard.suit) === this.cardService.getSuitColor(this.selectedCard.suit)) {
+        return;
+      }
+
+      // Card must be just one rank higher
+      if (lastCard.rank - 1 !== this.selectedCard.rank) {
+        return;
+      }
+    }
+
+    // Remove from source
+    if (this.revealed.includes(this.selectedCard)) {
+      this.revealed.pop();
+    } else {
+      for (const cards of this.columnCards) {
+        if (cards.includes(this.selectedCard)) {
+          cards.pop();
+          break;
         }
       }
-      
-      // Add to target
-      this.columnCards[index].push(this.selectedCard);
-
-      // Remove selection
-      this.selectedCard = undefined;
     }
-  }
 
+    // Add to target
+    this.columnCards[index].push(this.selectedCard);
+
+    // Remove selection
+    this.selectedCard = undefined;
+  }
 }
