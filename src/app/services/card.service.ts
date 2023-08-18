@@ -55,7 +55,7 @@ export class CardService {
       case CardRank.Ten:
         return "10";
       case CardRank.Jack:
-        return "D";
+        return "V";
       case CardRank.Queen:
         return "D";
       case CardRank.King:
@@ -75,6 +75,21 @@ export class CardService {
         return "heart";
       case CardSuit.Spade:
         return "spade";
+      default:
+        return "";
+    }
+  }
+
+  getSuitColor(suit: CardSuit | undefined) {
+    switch (suit) {
+      case CardSuit.Club:
+        return "black";
+      case CardSuit.Diamond:
+        return "red";
+      case CardSuit.Heart:
+        return "red";
+      case CardSuit.Spade:
+        return "black";
       default:
         return "";
     }
