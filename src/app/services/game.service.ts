@@ -55,6 +55,7 @@ export class GameService {
   }
 
   selectOrDeselectCard(card: PlayingCard | undefined) {
+
     if (this.selectedCard && this.selectedCard === card) {
 
       // Remove selection
@@ -62,7 +63,7 @@ export class GameService {
 
     } else if (this.selectedCard === undefined && card !== undefined) {
 
-      // Check if it's possible to select this card
+      // Check if it's possible to select this card from column
       for (const cards of this.columnCards) {
         const index = cards.indexOf(card);
         
@@ -75,7 +76,7 @@ export class GameService {
         // we can select
         if (index === cards.length - 1) {
           this.selectedCard = card;
-          break;
+          return;
 
           // else we check rule for all cards after the one found
         } else {
@@ -91,7 +92,15 @@ export class GameService {
           if (canSelect) {
             this.selectedCard = card;
           }
-          break;
+          return;
+        }
+      }
+
+      // Check if it's possible to select this card from header column
+      for (const cards of this.headerColumnCards) {
+        if (cards[cards.length - 1] === card) {
+          this.selectedCard = card;
+          return;
         }
       }
     }
@@ -147,6 +156,17 @@ export class GameService {
       }
     }
 
+    // If not found on columns, see if it's in a header column 
+    if (target.length === 0) {
+
+      for (const cards of this.headerColumnCards) {
+        if (cards[cards.length - 1] === this.selectedCard) {
+          target.push(...cards.splice(cards.length - 1, cards.length));
+          break;
+        }
+      }
+    }
+
     // Add to target
     this.columnCards[index].push(...target);
 
@@ -161,7 +181,7 @@ export class GameService {
       return;
     }
 
-    // Check if the card is the last card in the column
+    // Check if the card is the last card in one column
     let sourceIndex: number | undefined = undefined;
     for (let i = 0; i < this.columnCards.length; i++) {
       const cards = this.columnCards[i];

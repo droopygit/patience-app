@@ -1,7 +1,7 @@
 .playmat {
   background-color: forestgreen;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -9,9 +9,9 @@
 
 .playmat-header {
   display: flex;
-  height: 50px;
+  height: calc(var(--card-height) * .25);
   align-items: flex-end;
-  padding: 0 10px;
+  padding: 0 calc(var(--card-height) * .1);
 }
 
 .playmat-header .column>app-card {
@@ -20,9 +20,9 @@
 
 .playmat-body {
   display: flex;
-  margin-top: 20px;
+  margin-top: calc(var(--card-height) * .1);
   flex-grow: 1;
-  padding: 0 10px;
+  padding: 0 calc(var(--card-height) * .1);
 }
 
 .playmat-body.column {
@@ -31,8 +31,8 @@
 
 .playmat-footer {
   display: flex;
-  height: 150px;
-  padding: 0 10px;
+  height: calc(var(--card-height) * 1);
+  padding: 0 calc(var(--card-height) * .1);
 }
 
 .column {
@@ -48,7 +48,7 @@
 }
 
 .playmat-body .column>app-card {
-  margin-bottom: calc(var(--card-height) * -1 + 30px);
+  margin-bottom: calc(var(--card-height) * -1 + var(--card-height) * .15);
 }
 
 .playmat-footer .column>app-card {
@@ -67,8 +67,9 @@
   color: rgb(255, 255, 255, .6);
   border: var(--border-width) solid var(--fore-color);
   border-radius: var(--card-radius);
-  padding: 10px;
+  padding: calc(var(--card-height) * .10);
   cursor: pointer;
+  font-size: calc(var(--card-height) * .10); ;
 }
 
 .action:hover {

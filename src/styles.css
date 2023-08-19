@@ -1,6 +1,6 @@
 body {
-  --card-space: 10px;
-  --card-width: calc((100vw - 18 * var(--card-space)) / 8);
+  --card-space: calc(100vw * .01);
+  --card-width: calc((100vw * .81) / 8);
   --card-height: calc(var(--card-width) / 2.5 * 3.5);
   --card-radius: 5%;
   --fore-color: rgba(172, 255, 47, 0.1);
