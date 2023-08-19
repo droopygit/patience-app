@@ -2,27 +2,38 @@ import { Injectable } from '@angular/core';
 import { PlayingCard } from '../models/playing-card';
 import { CardService } from './card.service';
 import { CardRank } from '../models/card-rank';
+import { StateService } from './state.service';
+import { State } from '../models/state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  draw: PlayingCard[] = [];
   selectedCard: PlayingCard | undefined;
-  headerColumnCards: PlayingCard[][] = [[], [], [], [], [], [], [], []];
-  columnCards: PlayingCard[][] = [[], [], [], [], [], [], [], []];
+  state: State = new State();
 
   constructor(
-    private cardService: CardService
-  ) { }
+    private cardService: CardService,
+    private stateService: StateService
+  ) {
+
+    // Try to restore a game
+    const state = this.stateService.restoreState();
+    if (state) {
+      this.state = state;
+    } else {
+      this.startGame();
+    }
+  }
 
   startGame() {
 
+    // Clear the state
+    this.stateService.clearState();
+
     // Clear the game
-    this.draw = [];
-    this.headerColumnCards = [[], [], [], [], [], [], [], []];
-    this.columnCards = [[], [], [], [], [], [], [], []];
+    this.state = new State();
     this.selectedCard = undefined;
 
     // Add 2 x 52 card decks
@@ -37,18 +48,21 @@ export class GameService {
 
   dealCards() {
     for (let i = 0; i < 8; i++) {
-      const newCard = this.draw.pop()!;
+      const newCard = this.state.draw.pop()!;
       newCard.flipped = false;
-      this.columnCards[i].push(newCard);
+      this.state.columnCards[i].push(newCard);
     }
+
+    // Save the game
+    this.stateService.saveState(this.state);
   }
 
   createCards() {
-    this.draw.push(...this.cardService.get52Cards(), ...this.cardService.get52Cards());
+    this.state.draw.push(...this.cardService.get52Cards(), ...this.cardService.get52Cards());
   }
 
   shuffleCards() {
-    this.draw = this.cardService.shuffleCards(this.draw).map(c => {
+    this.state.draw = this.cardService.shuffleCards(this.state.draw).map(c => {
       c.flipped = true;
       return c;
     });
@@ -64,14 +78,14 @@ export class GameService {
     } else if (this.selectedCard === undefined && card !== undefined) {
 
       // Check if it's possible to select this card from column
-      for (const cards of this.columnCards) {
+      for (const cards of this.state.columnCards) {
         const index = cards.indexOf(card);
-        
+
         // if no card found we continue
         if (index === -1) {
           continue;
         }
-        
+
         // if the card found is the last one in the column
         // we can select
         if (index === cards.length - 1) {
@@ -97,7 +111,7 @@ export class GameService {
       }
 
       // Check if it's possible to select this card from header column
-      for (const cards of this.headerColumnCards) {
+      for (const cards of this.state.headerColumnCards) {
         if (cards[cards.length - 1] === card) {
           this.selectedCard = card;
           return;
@@ -128,8 +142,8 @@ export class GameService {
     }
 
     // Check if it's possible to move the card here
-    if (this.columnCards[index].length > 0) {
-      const lastCard = this.columnCards[index][this.columnCards[index].length - 1];
+    if (this.state.columnCards[index].length > 0) {
+      const lastCard = this.state.columnCards[index][this.state.columnCards[index].length - 1];
 
       // Card must be of the other color
       if (this.cardService.getSuitColor(lastCard.suit) === this.cardService.getSuitColor(this.selectedCard.suit)) {
@@ -146,7 +160,7 @@ export class GameService {
     let target: PlayingCard[] = [];
 
     // The card is in a column
-    for (const cards of this.columnCards) {
+    for (const cards of this.state.columnCards) {
       const index = cards.indexOf(this.selectedCard);
       if (index > -1) {
 
@@ -159,7 +173,7 @@ export class GameService {
     // If not found on columns, see if it's in a header column 
     if (target.length === 0) {
 
-      for (const cards of this.headerColumnCards) {
+      for (const cards of this.state.headerColumnCards) {
         if (cards[cards.length - 1] === this.selectedCard) {
           target.push(...cards.splice(cards.length - 1, cards.length));
           break;
@@ -168,10 +182,13 @@ export class GameService {
     }
 
     // Add to target
-    this.columnCards[index].push(...target);
+    this.state.columnCards[index].push(...target);
 
     // Remove selection
     this.selectedCard = undefined;
+
+    // Save the state
+    this.stateService.saveState(this.state);
   }
 
   moveSelectedCardToHeaderColumn(index: number) {
@@ -183,8 +200,8 @@ export class GameService {
 
     // Check if the card is the last card in one column
     let sourceIndex: number | undefined = undefined;
-    for (let i = 0; i < this.columnCards.length; i++) {
-      const cards = this.columnCards[i];
+    for (let i = 0; i < this.state.columnCards.length; i++) {
+      const cards = this.state.columnCards[i];
       if (cards[cards.length - 1] === this.selectedCard) {
         sourceIndex = i;
         break;
@@ -193,14 +210,17 @@ export class GameService {
 
     // Check if we can move it
     let lastCard: PlayingCard | undefined = undefined;
-    if (this.headerColumnCards[index].length > 0) {
-      lastCard = this.headerColumnCards[index][this.headerColumnCards[index].length - 1];
+    if (this.state.headerColumnCards[index].length > 0) {
+      lastCard = this.state.headerColumnCards[index][this.state.headerColumnCards[index].length - 1];
     }
     if (this.checkHeaderColumnRule(lastCard, this.selectedCard)) {
-        
+
       // Move the card
-      this.headerColumnCards[index].push(this.columnCards[sourceIndex!].pop()!);
+      this.state.headerColumnCards[index].push(this.state.columnCards[sourceIndex!].pop()!);
       this.selectedCard = undefined;
+
+      // Save the state
+      this.stateService.saveState(this.state);
     }
   }
 
@@ -218,5 +238,14 @@ export class GameService {
     }
 
     return false;
+  }
+
+  undo() {
+    const previousState = this.stateService.undo();
+    if (previousState) {
+      console.log(previousState);
+      
+      this.state = previousState;
+    }
   }
 }

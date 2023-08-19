@@ -21,6 +21,12 @@ export class AppComponent {
       this.gameService.startGame();
     }
   }
+
+  undo() {
+    if (confirm("Êtes-vous sûr de vouloir annuler votre dernier coup ?")) {
+      this.gameService.undo();
+    }
+  }
   
 
 }

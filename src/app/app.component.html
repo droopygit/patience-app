@@ -1,6 +1,6 @@
 <div class="playmat">
   <div class="playmat-header">
-    <ng-container *ngFor="let cards of gameService.headerColumnCards; let i = index">
+    <ng-container *ngFor="let cards of gameService.state.headerColumnCards; let i = index">
       <div class="column clickable" (click)="gameService.moveSelectedCardToHeaderColumn(i)">
         <app-card-place></app-card-place>
         <ng-container *ngFor="let card of cards">
@@ -11,7 +11,7 @@
   </div>
 
   <div class="playmat-body">
-    <ng-container *ngFor="let cards of gameService.columnCards; let i = index">
+    <ng-container *ngFor="let cards of gameService.state.columnCards; let i = index">
       <div class="column clickable" (click)="gameService.moveSelectedCardToColumn(i)">
         <app-card-place></app-card-place>
         <ng-container *ngFor="let card of cards">
@@ -26,15 +26,15 @@
       <div class="action" (click)="startNewGame()">
         <fa-icon [icon]="faPlus"></fa-icon> Nouvelle partie
       </div>
-      <!-- <div class="action">
+      <div class="action" (click)="undo()">
         <fa-icon [icon]="faUndo"></fa-icon> Annuler
-      </div> -->
+      </div>
     </div>
 
     <!-- Draw -->
     <div class="column clickable" (click)="gameService.dealCards()">
       <app-card-place></app-card-place>
-      <ng-container *ngFor="let card of gameService.draw">
+      <ng-container *ngFor="let card of gameService.state.draw">
         <app-card [card]="card"></app-card>
       </ng-container>
     </div>

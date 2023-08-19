@@ -9,7 +9,7 @@
 
 .playmat-header {
   display: flex;
-  height: calc(var(--card-height) * .25);
+  height: calc(var(--card-height) * .15);
   align-items: flex-end;
   padding: 0 calc(var(--card-height) * .1);
 }
@@ -31,7 +31,7 @@
 
 .playmat-footer {
   display: flex;
-  height: calc(var(--card-height) * 1);
+  height: calc(var(--card-height) * .5);
   padding: 0 calc(var(--card-height) * .1);
 }
 

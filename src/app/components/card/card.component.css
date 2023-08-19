@@ -16,14 +16,14 @@
 }
 
 .card-content {
-    padding: calc(var(--card-height) * .01) calc(var(--card-height) * .04);
+    padding: calc(var(--card-height) * .04);
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .card-header {
-    height: calc(var(--card-height) * .20);   
+    height: calc(var(--card-height) * .10);   
     width: calc(var(--card-height) * .10);
     display: flex;
     flex-direction: row;
