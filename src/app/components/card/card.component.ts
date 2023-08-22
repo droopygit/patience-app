@@ -23,9 +23,11 @@ export class CardComponent {
     public gameService: GameService
   ) { }
 
-  select() {
+  select(event: Event) {
     if (this.selectable && this.card) {
-      this.gameService.selectOrDeselectCard(this.card);
+      if (this.gameService.selectOrDeselectCard(this.card)) {
+        event.stopPropagation();
+      };
     }
   }
 }

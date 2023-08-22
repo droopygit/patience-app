@@ -1,4 +1,4 @@
-<div class="card" *ngIf="!card?.flipped; else flipped" (click)="select()">
+<div class="card" *ngIf="!card?.flipped; else flipped" (click)="select($event)">
     <div class="card-content" [ngClass]="{'selected': card === gameService.selectedCard}">    
         <div class="card-header" [ngClass]="{ 'red': card?.suit === cardSuit.Diamond || card?.suit === cardSuit.Heart}">
             <div>

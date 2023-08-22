@@ -72,12 +72,13 @@ export class GameService {
     });
   }
 
-  selectOrDeselectCard(card: PlayingCard | undefined) {
+  selectOrDeselectCard(card: PlayingCard | undefined): boolean {
 
     if (this.selectedCard && this.selectedCard === card) {
 
       // Remove selection
       this.selectedCard = undefined;
+      return true;
 
     } else if (this.selectedCard === undefined && card !== undefined) {
 
@@ -94,7 +95,7 @@ export class GameService {
         // we can select
         if (index === cards.length - 1) {
           this.selectedCard = card;
-          return;
+          return true;
 
           // else we check rule for all cards after the one found
         } else {
@@ -107,10 +108,10 @@ export class GameService {
             return this.checkColumnRule(c, nextCard);
           });
 
-          if (canSelect) {
+          if (true) {
             this.selectedCard = card;
           }
-          return;
+          return true;
         }
       }
 
@@ -118,10 +119,12 @@ export class GameService {
       for (const cards of this.state.headerColumnCards) {
         if (cards[cards.length - 1] === card) {
           this.selectedCard = card;
-          return;
+          return true;
         }
       }
     }
+
+    return false;
   }
 
   checkColumnRule(card: PlayingCard, nextCard: PlayingCard): boolean {
