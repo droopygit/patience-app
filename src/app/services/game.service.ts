@@ -47,6 +47,10 @@ export class GameService {
   }
 
   dealCards() {
+
+    // Remove selection
+    this.selectedCard = undefined;
+
     for (let i = 0; i < 8; i++) {
       const newCard = this.state.draw.pop()!;
       newCard.flipped = false;
@@ -143,6 +147,8 @@ export class GameService {
 
     // Check if it's possible to move the card here
     if (this.state.columnCards[index].length > 0) {
+
+      // Get last card of the column
       const lastCard = this.state.columnCards[index][this.state.columnCards[index].length - 1];
 
       // Card must be of the other color
@@ -152,6 +158,12 @@ export class GameService {
 
       // Card must be just one rank higher
       if (lastCard.rank - 1 !== this.selectedCard.rank) {
+        return;
+      }
+    } else {
+
+      // The first card of the column must be a king
+      if (this.selectedCard.rank !== CardRank.King) {
         return;
       }
     }
