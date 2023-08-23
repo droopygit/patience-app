@@ -6,6 +6,7 @@
     background-color: #fff;
     border: 1px solid var(--card-border-color);
     margin: -1px;
+    user-select: none;
 }
 
 .card {

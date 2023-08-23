@@ -53,6 +53,9 @@ export class GameService {
 
     for (let i = 0; i < 8; i++) {
       const newCard = this.state.draw.pop()!;
+      if (newCard === undefined) {
+        break;
+      }
       newCard.flipped = false;
       this.state.columnCards[i].push(newCard);
     }
@@ -108,7 +111,7 @@ export class GameService {
             return this.checkColumnRule(c, nextCard);
           });
 
-          if (true) {
+          if (canSelect) {
             this.selectedCard = card;
           }
           return true;

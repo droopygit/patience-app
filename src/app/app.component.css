@@ -20,9 +20,10 @@
 
 .playmat-body {
   display: flex;
-  margin-top: calc(var(--card-height) * .1);
+  margin-top: calc(var(--card-height) * .05);
   flex-grow: 1;
   padding: 0 calc(var(--card-height) * .1);
+  overflow-y: hidden;
 }
 
 .playmat-body.column {
@@ -36,10 +37,12 @@
 }
 
 .column {
+  margin-top: var(--card-space);
   margin-left: var(--card-space);
   margin-right: var(--card-space);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .playmat-body .column>app-card-place, 
