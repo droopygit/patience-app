@@ -46,7 +46,11 @@ export class GameService {
     this.dealCards();
   }
 
-  dealCards() {
+  sleep() {
+    return new Promise(resolve => setTimeout(resolve, 200));
+  }  
+
+  async dealCards() {
 
     // Remove selection
     this.selectedCard = undefined;
@@ -57,6 +61,7 @@ export class GameService {
         break;
       }
       newCard.flipped = false;
+      await this.sleep();
       this.state.columnCards[i].push(newCard);
     }
 

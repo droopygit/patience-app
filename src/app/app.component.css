@@ -15,7 +15,11 @@
 }
 
 .playmat-header .column>app-card {
+  animation-name: rotateup;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
   transform: rotate(180deg);
+  margin-top: calc(var(--card-height) * -1);
 }
 
 .playmat-body {
@@ -52,6 +56,23 @@
 
 .playmat-body .column>app-card {
   margin-bottom: calc(var(--card-height) * -1 + var(--card-height) * .15);
+  animation-name: slideup;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+}
+
+@keyframes slideup {
+  from {transform: translate(0px, 50px);}
+  to {transform: translate(0px, 0px);}
+}
+
+@keyframes rotateup {
+  from {
+    transform: rotate(120deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
 }
 
 .playmat-footer .column>app-card {
