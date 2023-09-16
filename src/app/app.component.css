@@ -1,17 +1,24 @@
+/* Entire playmat */
 .playmat {
   background-color: forestgreen;
-  width: 100vw;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
+  /* We add one card space at the left and right */
+  padding: 0 calc(var(--card-space));
 }
 
 .playmat-header {
   display: flex;
-  height: calc(var(--card-height) * .15);
   align-items: flex-end;
-  padding: 0 calc(var(--card-height) * .1);
+
+  /* We display only 15% of the cards in the header */
+  height: calc(var(--card-height) * .15);
+}
+
+.playmat-header .column {
+  overflow: hidden;
 }
 
 .playmat-header .column>app-card {
@@ -19,15 +26,18 @@
   animation-duration: 200ms;
   animation-timing-function: ease-out;
   transform: rotate(180deg);
+
+  /* In order to stack cards in the header, we substract the height of the card for the margin */
   margin-top: calc(var(--card-height) * -1);
 }
 
 .playmat-body {
   display: flex;
-  margin-top: calc(var(--card-height) * .05);
   flex-grow: 1;
-  padding: 0 calc(var(--card-height) * .1);
   overflow-y: hidden;
+
+  /* We recover the 95% of the cards */
+  margin-top: calc(var(--card-height) * .05);
 }
 
 .playmat-body.column {
@@ -37,7 +47,7 @@
 .playmat-footer {
   display: flex;
   height: calc(var(--card-height) * .5);
-  padding: 0 calc(var(--card-height) * .1);
+  padding: calc(var(--card-space));
 }
 
 .column {
@@ -46,11 +56,12 @@
   margin-right: var(--card-space);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
-.playmat-body .column>app-card-place, 
-.playmat-footer .column>app-card-place {
+.playmat-body .column>app-card-place,
+.playmat-footer .column>app-card-place 
+{
   margin-bottom: calc(var(--card-height) * -1);
 }
 
@@ -82,18 +93,18 @@
 .actions-column {
   flex-grow: 1;
   align-self: flex-end;
-  padding: 10px;
+  align-items: flex-start;
   display: flex;
   gap: 10px;
 }
 
 .action {
-  color: rgb(255, 255, 255, .6);
+  color: rgb(255, 255, 255);
   border: var(--border-width) solid var(--fore-color);
   border-radius: var(--card-radius);
   padding: calc(var(--card-height) * .10);
   cursor: pointer;
-  font-size: calc(var(--card-height) * .10); ;
+  font-size: calc(var(--card-height) * .10);
 }
 
 .action:hover {
@@ -106,4 +117,8 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.fill-space {
+  flex-grow: 1;
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faPlus, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faUndo, faSquareCaretUp } from '@fortawesome/free-solid-svg-icons';
 import 'playing-card';
 import { GameService } from './services/game.service';
 
@@ -11,6 +11,7 @@ import { GameService } from './services/game.service';
 export class AppComponent {
   faPlus = faPlus;
   faUndo = faUndo;
+  faSquareCaretUp = faSquareCaretUp;
 
   constructor(public gameService: GameService) {
     gameService.startGame();

@@ -1,10 +1,19 @@
 body {
+
+  /* We have 18 spaces for the cards and each space is 1% of the screen width */
+  /* 1 space is around each card plus one space for left edge and one space for right edge */
   --card-space: calc(100vw * .01);
-  --card-width: calc((100vw * .81) / 8);
+
+  /* The remaining spaces are divided in 8 columns */
+  --card-width: calc((100vw * .82) / 8 - var(--border-width) * 2);
+  
+  /* Height of the card must respect the ration of 2.5 width x 3.5 height */
   --card-height: calc(var(--card-width) / 2.5 * 3.5);
+  
+  --border-width: 2px;
   --card-radius: 5%;
   --fore-color: rgba(172, 255, 47, 0.1);
-  --border-width: 2px;
+
   margin: 0;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }

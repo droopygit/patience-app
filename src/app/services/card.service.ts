@@ -29,7 +29,21 @@ export class CardService {
   }
 
   shuffleCards(cards: PlayingCard[]): PlayingCard[] {
-    return cards.sort(() => Math.random() - 0.5)
+    let currentIndex = cards.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [cards[currentIndex], cards[randomIndex]] = [
+        cards[randomIndex], cards[currentIndex]];
+    }
+  
+    return cards;
   }
 
   getRankText(rank: CardRank | undefined): string {

@@ -29,14 +29,13 @@
       <div class="action" (click)="undo()">
         <fa-icon [icon]="faUndo"></fa-icon> Annuler
       </div>
-    </div>
+      <div class="fill-space">
+      </div>
+      <div class="action end" (click)="gameService.dealCards()">
+        <fa-icon [icon]="faSquareCaretUp"></fa-icon> Distribuer
 
-    <!-- Draw -->
-    <div class="column clickable" (click)="gameService.dealCards()">
-      <app-card-place></app-card-place>
-      <ng-container *ngFor="let card of gameService.state.draw">
-        <app-card [card]="card"></app-card>
-      </ng-container>
+        <div><small>{{ 13 - (gameService.state.draw.length / 8) | number: '1.0-0' }} sur 13</small></div>
+      </div>
     </div>
   </div>
 </div>
