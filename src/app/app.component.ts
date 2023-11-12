@@ -14,7 +14,6 @@ export class AppComponent {
   faSquareCaretUp = faSquareCaretUp;
 
   constructor(public gameService: GameService) {
-    gameService.startGame();
   }
 
   startNewGame() {

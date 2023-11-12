@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PlayingCard } from '../models/playing-card';
 import { CardService } from './card.service';
 import { CardRank } from '../models/card-rank';
-import { StateService } from './state.service';
+import { HistoryService } from './state.service';
 import { State } from '../models/state';
 
 @Injectable({
@@ -15,11 +15,11 @@ export class GameService {
 
   constructor(
     private cardService: CardService,
-    private stateService: StateService
+    private historyService: HistoryService
   ) {
 
     // Try to restore a game
-    const state = this.stateService.restoreState();
+    const state = this.historyService.restore();
     if (state) {
       this.state = state;
     } else {
@@ -30,7 +30,7 @@ export class GameService {
   startGame() {
 
     // Clear the state
-    this.stateService.clearState();
+    this.historyService.clear();
 
     // Clear the game
     this.state = new State();
@@ -66,7 +66,7 @@ export class GameService {
     }
 
     // Save the game
-    this.stateService.saveState(this.state);
+    this.historyService.save(this.state);
   }
 
   createCards() {
@@ -211,7 +211,7 @@ export class GameService {
     this.selectedCard = undefined;
 
     // Save the state
-    this.stateService.saveState(this.state);
+    this.historyService.save(this.state);
   }
 
   moveSelectedCardToHeaderColumn(index: number) {
@@ -243,7 +243,7 @@ export class GameService {
       this.selectedCard = undefined;
 
       // Save the state
-      this.stateService.saveState(this.state);
+      this.historyService.save(this.state);
     }
   }
 
@@ -264,7 +264,7 @@ export class GameService {
   }
 
   undo() {
-    const previousState = this.stateService.undo();
+    const previousState = this.historyService.undo();
     if (previousState) {
       console.log(previousState);
       

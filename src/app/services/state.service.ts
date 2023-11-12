@@ -1,43 +1,42 @@
 import { Injectable } from '@angular/core';
-import { GameService } from './game.service';
 import { State } from '../models/state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StateService {
+export class HistoryService {
 
   private stateKey = "states";
-  private states: State[] = [];
+  private history: State[] = [];
 
   constructor() {
   }
 
-  saveState(state: State) {
+  save(state: State) {
     const stateAsString = JSON.stringify(state);
-    this.states.push(JSON.parse(stateAsString));
-    localStorage.setItem(this.stateKey, JSON.stringify(this.states));
+    this.history.push(JSON.parse(stateAsString));
+    localStorage.setItem(this.stateKey, JSON.stringify(this.history));
   }
 
-  restoreState(): State | undefined {
+  restore(): State | undefined {
     const statesAsString = localStorage.getItem(this.stateKey);
-    if (statesAsString) {
-      this.states = JSON.parse(statesAsString);
-      return this.states[this.states.length - 1];
+    if (statesAsString) {      
+      this.history = JSON.parse(statesAsString);
+      return this.history[this.history.length - 1];
     }
     return undefined;
   }
 
-  clearState() {
-    this.states = [];
+  clear() {
+    this.history = [];
     localStorage.removeItem(this.stateKey);
   }
 
   undo(): State | undefined {
-    this.states.pop();
-    localStorage.setItem(this.stateKey, JSON.stringify(this.states));
-    if (this.states.length > 0) {
-      return this.states[this.states.length - 1];
+    this.history.pop();
+    localStorage.setItem(this.stateKey, JSON.stringify(this.history));
+    if (this.history.length > 0) {
+      return this.history[this.history.length - 1];
     }
     return undefined;
   }
