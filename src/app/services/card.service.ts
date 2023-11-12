@@ -29,21 +29,56 @@ export class CardService {
   }
 
   shuffleCards(cards: PlayingCard[]): PlayingCard[] {
-    let currentIndex = cards.length,  randomIndex;
+
+    // Get groups of cards
+    let groupsOfCards = this.createGroupsOfCards(cards);
   
-    // While there remain elements to shuffle.
+    let currentIndex = groupsOfCards.length
+    let randomIndex = 0;
+  
+    // While there remain elements to shuffle
     while (currentIndex > 0) {
   
       // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
-      [cards[currentIndex], cards[randomIndex]] = [
-        cards[randomIndex], cards[currentIndex]];
+      // And swap it with the current element
+      [groupsOfCards[currentIndex], groupsOfCards[randomIndex]] = [
+        groupsOfCards[randomIndex], groupsOfCards[currentIndex]];
     }
   
-    return cards;
+    return groupsOfCards.flat();
+  }
+
+  createGroupsOfCards(cards: PlayingCard[]): PlayingCard[][] {
+    
+    // Create groups of cards
+    const groups: PlayingCard[][] = [];
+    let currentGroup: PlayingCard[] = [];
+
+    // Randomly select a group length
+    let currentGroupLength = Math.floor(Math.random() * 4) + 2;
+
+    // Create groups
+    for (let i = 0; i < cards.length; i++) {
+
+      currentGroup.push(cards[i]);
+
+      if (currentGroup.length === currentGroupLength) {
+        groups.push([...currentGroup]);
+        currentGroup = [];
+
+        // Randomly select a new group length
+        currentGroupLength = Math.floor(Math.random() * 4) + 2;
+      }
+    }
+
+    if (currentGroup.length > 0) {
+      groups.push([...currentGroup]);
+    }
+
+    return groups;
   }
 
   getRankText(rank: CardRank | undefined): string {

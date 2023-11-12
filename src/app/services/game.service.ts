@@ -29,17 +29,33 @@ export class GameService {
 
   startGame() {
 
-    // Clear the state
+    // Clear the history
     this.historyService.clear();
 
-    // Clear the game
-    this.state = new State();
+      // If there is already a game we use it to create the new draw
+    if (this.state.columnCards.flat().length > 0 || this.state.headerColumnCards.flat().length > 0) {
+
+      // We append the column cards and the header column cards to the draw
+      this.state.draw.push(...this.state.headerColumnCards.flat(), ...this.state.columnCards.flat());
+      
+      // Clear the columns
+      this.state.columnCards = [[], [], [], [], [], [], [], []];
+      this.state.headerColumnCards = [[], [], [], [], [], [], [], []];
+    
+    } else {
+
+      // Clear the game
+      this.state = new State();
+
+      // Add 2 x 52 card decks
+      this.createCards();
+    }
+
+    // Remove selected card
     this.selectedCard = undefined;
 
-    // Add 2 x 52 card decks
-    this.createCards();
-
-    // Shuffle the cards
+    // Shuffle the cards two times
+    this.shuffleCards();
     this.shuffleCards();
 
     // Deal cards
@@ -48,7 +64,7 @@ export class GameService {
 
   sleep() {
     return new Promise(resolve => setTimeout(resolve, 200));
-  }  
+  }
 
   async dealCards() {
 
@@ -267,7 +283,7 @@ export class GameService {
     const previousState = this.historyService.undo();
     if (previousState) {
       console.log(previousState);
-      
+
       this.state = previousState;
     }
   }
